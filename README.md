@@ -1,12 +1,18 @@
 # Gerador de Fractais com Terraform e Ansible
 
+<br>
+
 # Objetivo
-O Projeto tem como objetivo principal a implementação do Gerador Fractal na OCI (Oracle Cloud Infrastructure), utilizando Terraform e Ansible.
+O Projeto tem como objetivo principal a implementação do Gerador de Fractais na OCI (Oracle Cloud Infrastructure), utilizando Terraform e Ansible.
+
+<br>
 
 # Contribuidores
 - Anderson Luiz Karl - 2417571
 - Pedro Henrique Oliveira Lima - 2325859
- 
+
+<br>
+
 # Arquivos do Terraform
 
 - **1-provider.tf**: No arquivo estão declaradas as informações necessárias para o funcionamento da Cloud utilizada, que no caso será a OCI (Oracle Cloud Infrastructure), é nesse arquivo que contem as chaves de acesso para se conectar a nuvem.
@@ -24,6 +30,7 @@ O Projeto tem como objetivo principal a implementação do Gerador Fractal na OC
 
 - **variables.tf**: Arquivo que contém as variáveis necessárias para o provisionamento correto do ambiente. Portanto, é de suma importância certificar-se das informações decladas, pois, qualquer informação errada pode impactar a criação. 
 
+<br>
 
 # Arquivos do Ansible
 
@@ -37,7 +44,6 @@ O Projeto tem como objetivo principal a implementação do Gerador Fractal na OC
 
 - **inventory**: Arquivo de inventário é criado automáticamente no momento do provisionamento da máquina virtual.
 
-<br>
 <br>
 
 # Provisionamento Terraform
@@ -57,6 +63,7 @@ terraform init
 </details>
 
 ---
+
 <br>
 
 Após a inicialização do terraform, execute o comando abaixo que irá exibir tudo o que será ser adicionado, alterado ou removido da sua Cloud:
@@ -70,6 +77,7 @@ terraform plan
 </details>
 
 ---
+
 <br>
 
 Após validação, execute o comando abaixo que irá criar tudo o que está declarado nos arquivos do terraform e que foi exibido no comando *terraform plan*:
@@ -82,7 +90,6 @@ terraform apply
   <img src="assets/terraform-apply.png" alt="Saida do comando terraform apply" width="400" height="40">
 </details>
 
-<br>
 <br>
 
 # Playbook Ansible
@@ -104,7 +111,6 @@ ansible-playbook -i ansible/inventory ansible/fractal-python-playbook.yaml
 ---
 
 <br>
-<br>
 
 # Próximos Passos
 
@@ -123,7 +129,6 @@ terraform destroy
 ``` 
 
 <br>
-<br>
 
 # Recursos Adicionais
 
@@ -132,9 +137,8 @@ Para mais informações e recursos úteis, confira os links abaixo:
 - [Documentação do Ansible](https://docs.ansible.com/)
 - [Configurar Terraform com a OCI](https://docs.oracle.com/pt-br/iaas/developer-tutorials/tutorials/tf-provider/01-summary.htm)
 - [Documentação Terraform com Oracle Cloud](https://registry.terraform.io/providers/oracle/oci/latest/docs)
-- [Repositório do Projeto Fractal no GitHub](https://github.com/Artoshk/fractal)
+- [Repositório do Projeto Gerador de Fractais no GitHub](https://github.com/Artoshk/fractal)
 
 <br>
-<br>
 
-### Agradecemos por utilizar a aplicação Fractal!
+### Agradecemos por utilizar a aplicação Gerador de Fractais!
