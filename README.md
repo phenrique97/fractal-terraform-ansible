@@ -90,6 +90,11 @@ terraform apply
   <img src="assets/terraform-apply.png" alt="Saida do comando terraform apply" width="400" height="40">
 </details>
 
+<details>
+  <summary>Instância em execução:</summary>
+  <img src="assets/oci-instance.png" alt="Instancia OCI em execução" width="400" height="40">
+</details>
+
 <br>
 
 # Playbook Ansible
