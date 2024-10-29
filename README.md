@@ -92,7 +92,7 @@ terraform apply
 
 <details>
   <summary>Instância em execução:</summary>
-  <img src="assets/oci-instance.png" alt="Instancia OCI em execução" width="400" height="40">
+  <img src="assets/oci-instance.png" alt="Instancia OCI em execução" width="1300" height="600">
 </details>
 
 <br>
