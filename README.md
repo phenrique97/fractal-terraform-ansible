@@ -124,7 +124,7 @@ Após o comando *ansible-playbook* gerar a URL da aplicação em sua saída, voc
 Caso queira destruir o ambiente, executar os comandos:
 
 ```
-cd ../terraform
+cd terraform
 terraform destroy
 ``` 
 
