@@ -1,6 +1,6 @@
-####
-## MAIN ROUTING
-####
+## 
+## Rede Principal.
+## 
 resource "oci_core_vcn" "main_vcn" {
   cidr_blocks = [
     "10.0.0.0/16",
@@ -14,6 +14,9 @@ resource "oci_core_vcn" "main_vcn" {
   ]
 }
 
+## 
+## Internet Gateway.
+## 
 resource "oci_core_internet_gateway" "main_vcn_internet_gateway" {
   compartment_id = local.availability_domain
   display_name   = "Internet Gateway Main VCN"
@@ -23,11 +26,13 @@ resource "oci_core_internet_gateway" "main_vcn_internet_gateway" {
   vcn_id = oci_core_vcn.main_vcn.id
 }
 
+## 
+## Sub Redes.
+## 
 resource "oci_core_subnet" "main_subnet" {
   vcn_id         = oci_core_vcn.main_vcn.id
   compartment_id = local.availability_domain
   cidr_block     = "10.0.0.0/24"
-  #dhcp_options_id = oci_core_vcn.main_vcns.default_dhcp_options_id
   display_name = "Main SubNet"
   dns_label    = "mainsubnet"
   freeform_tags = {
@@ -36,13 +41,15 @@ resource "oci_core_subnet" "main_subnet" {
   prohibit_internet_ingress  = "false"
   prohibit_public_ip_on_vnic = "false"
 
-  # we are interested in this, allows SSH default
   security_list_ids = [
     oci_core_vcn.main_vcn.default_security_list_id,
-    #oci_core_security_list.https_security_list.id
   ]
 }
 
+
+## 
+## Rota Padrão.
+## 
 resource "oci_core_default_route_table" "Default-Route-Table-for-main-vcn" {
   compartment_id = local.availability_domain
   display_name   = "Default Route Table for Main VCN"
@@ -58,7 +65,7 @@ resource "oci_core_default_route_table" "Default-Route-Table-for-main-vcn" {
 }
 
 ## 
-## SECURITY GROUPS
+## Grupos de segurança.
 ## 
 resource "oci_core_network_security_group" "my_security_group_http" {
   compartment_id = local.availability_domain
@@ -73,7 +80,7 @@ resource "oci_core_network_security_group" "my_security_group_ssh" {
 }
 
 ## 
-## NSG Rules
+## Regras do grupo de segurança.
 ## 
 resource "oci_core_network_security_group_security_rule" "https_security_rule" {
   network_security_group_id = oci_core_network_security_group.my_security_group_http.id
@@ -102,55 +109,5 @@ resource "oci_core_network_security_group_security_rule" "ssh_security_group_rul
       max = "22"
       min = "22"
     }
-  }
-}
-
-####
-## SECURITY LISTS
-####
-resource "oci_core_default_security_list" "default-seclist" {
-  compartment_id = local.availability_domain
-  display_name   = "Default Security List for Main VCN"
-  egress_security_rules {
-    destination      = "0.0.0.0/0"
-    destination_type = "CIDR_BLOCK"
-    protocol         = "all"
-    stateless        = "false"
-  }
-  freeform_tags = {
-  }
-  ingress_security_rules {
-    protocol    = "6"
-    source      = "0.0.0.0/0"
-    source_type = "CIDR_BLOCK"
-    stateless   = "false"
-    tcp_options {
-      max = "22"
-      min = "22"
-    }
-  }
-  ingress_security_rules {
-    icmp_options {
-      code = "4"
-      type = "3"
-    }
-    protocol    = "1"
-    source      = "0.0.0.0/0"
-    source_type = "CIDR_BLOCK"
-    stateless   = "false"
-  }
-  ingress_security_rules {
-    icmp_options {
-      code = "-1"
-      type = "3"
-    }
-    protocol    = "1"
-    source      = "10.0.0.0/16"
-    source_type = "CIDR_BLOCK"
-    stateless   = "false"
-  }
-  manage_default_resource_id = oci_core_vcn.main_vcn.default_security_list_id
-  lifecycle {
-    create_before_destroy = true
   }
 }

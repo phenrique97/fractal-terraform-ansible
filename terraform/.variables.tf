@@ -1,6 +1,6 @@
 locals {
   availability_domain  = "<tenancy-ocid>"
-  ubuntu2204ocid       = "<image-ocid>"
+  ubuntu2204ocid       = "ocid1.image.oc1.sa-saopaulo-1.aaaaaaaasab5yshycv5lxwio273qe4zw3yqbu6znsvu7rzuskb3zp7kr7pna"
   user_ocid            = "<user-ocid>"
   fingerprint          = "<your-fingerprint>"
   private_api_key_path = pathexpand("/path/your/oci-api-key.pem")

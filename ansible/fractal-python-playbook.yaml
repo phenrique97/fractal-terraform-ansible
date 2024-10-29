@@ -1,29 +1,38 @@
 ---
-- name: Instalação das dependencias - fractal Python
+- name: Instalação Fractal UV Python
   hosts: all
   become: yes
 
   tasks:
-  - name: Add Docker GPG apt Key
+  - name: Adicionando Docker GPG Key
     apt_key:
       url: https://download.docker.com/linux/ubuntu/gpg
       state: present
 
-  - name: Add Docker Repository
+  - name: Adicionando Repositório APT Docker
     apt_repository:
       repo: deb https://download.docker.com/linux/ubuntu focal stable
       state: present
 
-  - name: Update apt and install docker-ce
+  - name: Atualizando repositórios e instalando Docker
     apt:
       name: docker-ce
       state: latest
       update_cache: yes
 
-
-  - name: Create a data container
+  - name: Startando o container fractal-uv-python
     docker_container:
       name: fractal-uv-python
       image: andersonlkarl/fractal-uv-python:1.1
       ports:
       - "7860:7860"
+
+  - name: Obtendo o endereço IP público da máquina
+    uri:
+      url: https://ipinfo.io/ip
+      return_content: yes
+    register: public_ip
+
+  - name: Exibindo a URL de acesso
+    debug:
+      msg: "A aplicação está disponível em http://{{ public_ip.content | trim }}:7860"
