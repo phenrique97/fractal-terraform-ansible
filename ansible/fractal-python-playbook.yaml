@@ -1,0 +1,29 @@
+---
+- name: Instalação das dependencias - fractal Python
+  hosts: all
+  become: yes
+
+  tasks:
+  - name: Add Docker GPG apt Key
+    apt_key:
+      url: https://download.docker.com/linux/ubuntu/gpg
+      state: present
+
+  - name: Add Docker Repository
+    apt_repository:
+      repo: deb https://download.docker.com/linux/ubuntu focal stable
+      state: present
+
+  - name: Update apt and install docker-ce
+    apt:
+      name: docker-ce
+      state: latest
+      update_cache: yes
+
+
+  - name: Create a data container
+    docker_container:
+      name: fractal-uv-python
+      image: andersonlkarl/fractal-uv-python:1.1
+      ports:
+      - "7860:7860"
